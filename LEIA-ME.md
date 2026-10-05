@@ -5,9 +5,9 @@ Toda a arte, os sons e a música são gerados em código (Canvas e áudio proced
 
 ## Como gerar o APK (escolha UMA opção)
 
-**A) Script, sem Gradle** (Linux, macOS, WSL ou Termux com Android SDK):
+**A) Script, sem Gradle** (Linux, macOS, WSL ou Termux com JDK 17+ e Android SDK):
 
-    export ANDROID_HOME=/caminho/do/Android/Sdk      # precisa de platforms;android-34 e build-tools;34.0.0
+    export ANDROID_HOME=/caminho/do/Android/Sdk      # precisa de platforms;android-34 e build-tools;36.0.0+
     ./build_apk.sh                                   # gera AcademiaArcana-debug.apk
 
 **B) GitHub Actions (sem instalar nada):** envie esta pasta para um repositório no GitHub →

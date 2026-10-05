@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Gera o APK debug SEM Gradle, usando as ferramentas do Android SDK.
-# Requisitos: JDK 8+ (javac, keytool), zip, e o Android SDK com
-#   "platforms;android-34" (ou outra) e "build-tools;34.0.0" (ou outra).
+# Requisitos: JDK 17+, zip, e o Android SDK com
+#   "platforms;android-34" e "build-tools;36.0.0" (ou mais recente).
 # Uso: ANDROID_HOME=/caminho/do/sdk ./build_apk.sh
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -16,7 +16,14 @@ fi
 
 BT="$(ls -d "$SDK"/build-tools/* 2>/dev/null | sort -V | tail -1)"
 PLAT="$(ls -d "$SDK"/platforms/android-* 2>/dev/null | sort -V | tail -1)"
-[ -n "$BT" ] && [ -n "$PLAT" ] || { echo "ERRO: instale build-tools e uma platform (sdkmanager \"platforms;android-34\" \"build-tools;34.0.0\")."; exit 1; }
+[ -n "$BT" ] && [ -n "$PLAT" ] || { echo "ERRO: instale build-tools e uma platform (sdkmanager \"platforms;android-34\" \"build-tools;36.0.0\")."; exit 1; }
+BT_VERSION="$(basename "$BT")"
+MIN_BT_VERSION=36.0.0
+if [ "$(printf '%s\n' "$MIN_BT_VERSION" "$BT_VERSION" | sort -V | head -1)" != "$MIN_BT_VERSION" ]; then
+  echo "ERRO: build-tools $BT_VERSION não é compatível com o D8 desta compilação."
+  echo "Instale build-tools $MIN_BT_VERSION ou mais recente."
+  exit 1
+fi
 AJAR="$PLAT/android.jar"
 echo "SDK: $SDK | build-tools: $(basename "$BT") | $(basename "$PLAT")"
 

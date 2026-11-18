@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Minha Loja Cliente</string>
+    <string name="admin_description">Permite bloquear a tela somente após autorização explícita do titular. Não monitora mensagens, chamadas ou arquivos.</string>
+</resources>

@@ -1,4 +1,4 @@
-name: Build Minha Loja APK
+name: Build Minha Loja APKs
 
 on:
   push:
@@ -22,9 +22,13 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
-      - name: Compilar APK debug
-        run: gradle --no-daemon :app:assembleDebug
+      - name: Compilar APKs
+        run: gradle --no-daemon :app:assembleDebug :cliente:assembleDebug
       - uses: actions/upload-artifact@v4
         with:
-          name: MinhaLoja-debug-apk
+          name: MinhaLoja-painel-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MinhaLoja-cliente-apk
+          path: cliente/build/outputs/apk/debug/cliente-debug.apk

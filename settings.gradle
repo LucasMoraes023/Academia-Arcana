@@ -6,4 +6,4 @@ dependencyResolutionManagement {
     repositories { google(); mavenCentral() }
 }
 rootProject.name = "LojaFinanciamento"
-include ':app'
+include ':app', ':cliente'
